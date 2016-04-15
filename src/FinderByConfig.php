@@ -80,7 +80,7 @@ class FinderByConfig
 
     protected function createFromConfig($config)
     {
-        $finder = $this->createFromArray(getValue('in', $config));
+        $finder = $this->createFromArray((array) getValue('in', $config));
         $this->setWithoutValueOptions($finder, $config);
         $this->setArrayOptions($finder, $config);
         $this->setStrictBoolOptions($finder, $config);

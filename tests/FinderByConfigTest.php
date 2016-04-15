@@ -27,7 +27,6 @@ class FinderByConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([
             'composer.json',
             'src/FinderByConfig.php',
-            'tests/FinderByConfigTest.php',
         ], $files);
     }
 
@@ -45,6 +44,20 @@ class FinderByConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([
             './composer.json',
             './src/FinderByConfig.php',
+        ], $files);
+    }
+
+    public function testInStringShouldWork()
+    {
+        $fbc = new FinderByConfig();
+        $finder = $fbc(static::$config->{'in-string'});
+
+        $files = array_map(function ($file) {
+            return $file->getPathname();
+        }, array_values(iterator_to_array($finder)));
+
+        $this->assertSame([
+            'tests/fixtures/file.json',
         ], $files);
     }
 }

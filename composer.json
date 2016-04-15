@@ -29,7 +29,7 @@
     },
     "extra": {
         "you/your-package": {
-            "simple": ["src", "tests", "composer.json"],
+            "simple": ["src", "composer.json"],
             "extended": {
                 "in": ["."],
                 "name": ["*.php", "*.json"],
@@ -41,6 +41,9 @@
                 "ignoreVCS": true,
                 "followLinks": false,
                 "ignoreUnreadableDirs": false
+            },
+            "in-string": {
+                "in": "tests/fixtures"
             }
         }
     },
