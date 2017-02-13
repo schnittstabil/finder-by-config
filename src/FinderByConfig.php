@@ -2,7 +2,7 @@
 
 namespace Schnittstabil\FinderByConfig;
 
-use function Schnittstabil\Get\getValue;
+use Schnittstabil\Get;
 use Symfony\Component\Finder\Finder;
 
 class FinderByConfig
@@ -37,7 +37,7 @@ class FinderByConfig
             'sortByModifiedTime',
             'followLinks',
         ] as $setter) {
-            if (filter_var(getValue($setter, $config), FILTER_VALIDATE_BOOLEAN)) {
+            if (filter_var(Get\getValue($setter, $config), FILTER_VALIDATE_BOOLEAN)) {
                 $finder->$setter();
             }
         }
@@ -58,7 +58,7 @@ class FinderByConfig
             'exclude',
             'addVCSPattern',
         ] as $setter) {
-            foreach ((array) getValue($setter, $config, []) as $value) {
+            foreach ((array) Get\getValue($setter, $config, []) as $value) {
                 $finder->$setter($value);
             }
         }
@@ -71,7 +71,7 @@ class FinderByConfig
             'ignoreVCS',
             'ignoreUnreadableDirs',
         ] as $setter) {
-            $value = getValue($setter, $config);
+            $value = Get\getValue($setter, $config);
             if ($value !== null) {
                 $finder->$setter(filter_var($value, FILTER_VALIDATE_BOOLEAN));
             }
@@ -80,7 +80,7 @@ class FinderByConfig
 
     protected function createFromConfig($config)
     {
-        $finder = $this->createFromArray((array) getValue('in', $config));
+        $finder = $this->createFromArray((array) Get\getValue('in', $config));
         $this->setWithoutValueOptions($finder, $config);
         $this->setArrayOptions($finder, $config);
         $this->setStrictBoolOptions($finder, $config);
@@ -90,7 +90,7 @@ class FinderByConfig
 
     public function __invoke($config)
     {
-        if (getValue('in', $config) === null) {
+        if (Get\getValue('in', $config) === null) {
             return $this->createFromArray((array) $config);
         }
 

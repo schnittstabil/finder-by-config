@@ -2,7 +2,7 @@
 
 namespace Schnittstabil\FinderByConfig;
 
-class FinderByConfigTest extends \PHPUnit_Framework_TestCase
+class FinderByConfigTest extends \PHPUnit\Framework\TestCase
 {
     protected static $config;
 
